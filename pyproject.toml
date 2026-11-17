@@ -1,10 +1,12 @@
 [project]
 name = "slate-mcp"
 version = "0.1.0"
-description = "Add your description here"
+description = "Shared blackboard MCP server for multiple agents."
 readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
 authors = [
-    { name = "Dimitrensen", email = "mitsen@hotmail.gr" }
+    { name = "Dimitrensen" }
 ]
 requires-python = ">=3.13"
 dependencies = [
@@ -12,7 +14,16 @@ dependencies = [
 ]
 
 [project.scripts]
-slate-mcp = "slate_mcp:main"
+slate = "slate_mcp.cli:main"
+slate-mcp = "slate_mcp.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
 
 [build-system]
 requires = ["uv_build>=0.13.9,<0.14.0"]

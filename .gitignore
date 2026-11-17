@@ -1,1 +1,41 @@
+# Python
 __pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Local blackboard and Docker data. Never commit a database.
+.slate/
+.slate-data/
+*.db
+*.db-wal
+*.db-shm
+
+# Secrets and local config
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+secrets/
+
+# Editors and OS
+.idea/
+.vscode/
+.cursor/
+.claude/
+*.swp
+.DS_Store
+
+# Local Compose overrides
+docker-compose.override.yml

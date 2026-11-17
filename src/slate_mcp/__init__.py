@@ -1,2 +1,3 @@
-def main() -> None:
-    print("Hello from slate-mcp!")
+"""Shared blackboard for MCP clients."""
+
+__version__ = "0.1.0"
