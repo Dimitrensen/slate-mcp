@@ -4,7 +4,7 @@
 import os
 import sqlite3
 from pathlib import Path
-from typing import Optional
+import typing
 
 from mcp.server import MCPServer
 
@@ -41,7 +41,7 @@ mcp = MCPServer(
 )
 
 @mcp.tool()
-def write(text: str, tags: Optional[str] = None, ttl_hours: Optional[int] = None) -> str:
+def write(text: str, tags: typing.Optional[str] = None, ttl_hours: typing.Optional[int] = None) -> str:
     """Store a fact on the shared blackboard.
 
     Args:
@@ -62,7 +62,7 @@ def write(text: str, tags: Optional[str] = None, ttl_hours: Optional[int] = None
     return f"Stored fact {fact_id}"
 
 @mcp.tool()
-def query(q: Optional[str] = None, tags: Optional[str] = None, limit: int = 20) -> str:
+def query(q: typing.Optional[str] = None, tags: typing.Optional[str] = None, limit: int = 20) -> str:
     """Search facts by keyword or tags.
 
     Args:
