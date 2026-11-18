@@ -120,7 +120,7 @@ Cursor:
 
 ## Docker
 
-The image is meant for a small ARM board such as a Pironman 5 (8 GB RAM, local SSD).
+The image is meant for a small ARM board like a Pi5(8 GB RAM).
 The base image is multi-arch. Compose caps the container at 256 MB and half a CPU.
 The SQLite file lives on a bind mount, default `./.slate-data`, which is gitignored.
 
