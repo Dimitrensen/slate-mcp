@@ -1,3 +1,0 @@
-To be deleted.
-
-This folder will host the configuration of the Nexus orchestrator, an optional agent for users who want to assign their stronger agent to assign workloads and call other agents automatically or on demand.
