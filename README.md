@@ -5,8 +5,8 @@ Multiple agents can write and read the same facts without you copying context be
 
 ## What it does
 
-Slate is a small, self-hosted MCP server. One agent writes a fact. Another agent queries it.
-There is no central orchestrator. The shared state is one SQLite file.
+Slate is the terminal board: a small, self-hosted MCP server. One agent writes a fact. Another agent queries it.
+The shared state is one SQLite file. Your own terminal client starts the server. Slate does not install a harness or an orchestrator.
 
 ## Tools
 
@@ -84,6 +84,43 @@ Global config is `~/.cursor/mcp.json`. Project config is `.cursor/mcp.json`.
 ```
 
 Restart Cursor after saving the file. A write from one client is then visible to a query from the other, because both processes open the same file.
+
+### Pi
+
+If you already run [Pi](https://pi.dev/), point it at the same command and the same `SLATE_DB`.
+User scope is `~/.pi/agent/mcp.json`. Project scope is `.pi/mcp.json`, and Pi reads that file only after you trust the project.
+
+```json
+{
+  "mcpServers": {
+    "slate": {
+      "command": "/absolute/path/to/uv",
+      "args": ["run", "--directory", "/absolute/path/to/slate-mcp", "slate"],
+      "env": {
+        "SLATE_DB": "/absolute/path/.slate/slate.db"
+      },
+      "exposure": "direct"
+    }
+  }
+}
+```
+
+`exposure` is `direct` so the four tools are offered to the model. Pi's default leaves MCP tools for its code-mode search to find.
+
+The same entry from a shell:
+
+```bash
+pi mcp add slate --env SLATE_DB=/absolute/path/.slate/slate.db -- /absolute/path/to/uv run --directory /absolute/path/to/slate-mcp slate
+```
+
+Then run `pi mcp list`. Add `--local` to write `.pi/mcp.json` instead of the user file. Pi speaks stdio and Streamable HTTP. Use this stdio entry for Pi.
+
+### Orca
+
+If you already run [Orca](https://orca.dev/), point it at the same command and the same `SLATE_DB`.
+Orca runs the agent programs you installed, each in its own git worktree. The facts stay in the Slate database. Give every agent Orca launches the Slate entry for that agent, using the same `uv` command, arguments, and `SLATE_DB` as the sections above.
+
+Orca can also register servers under Settings → Integrations → MCP. Those tools show up inside agent CLIs that support MCP. Use the same command and the same `SLATE_DB` there. Repository MCP settings stay on the machine where you saved them.
 
 ### Optional SSE
 
